@@ -10,8 +10,8 @@ router.post('/add', async (req, res, next) => {
 
 // 加入购物车 累加
 router.post('/directAdd', async (req, res, next) => {
-  console.log(req.body)
-  await Cart.directAddCart(req.body)
+  // console.log('444')
+  const data = await Cart.directAddCart(req.body, req.userId)
   res.success()
 })
 
@@ -23,8 +23,8 @@ router.post('/delete', async (req, res, next) => {
 
 // 查询购物车
 router.get('/find', async (req, res, next) => {
-  const data = await Cart.findCart(req.query)
-  res.success(data)
+  const data = await Cart.findCart(req.userId)
+  if (data) res.success(data)
 })
 
 // 改变购物车内 单个 商品选中状态

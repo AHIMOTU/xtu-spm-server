@@ -21,4 +21,21 @@ async function findAddress ({ user_id }) {
   return res
 }
 
-module.exports = { addAddress, findAddress }
+/**
+ * 编辑地址
+ */
+async function editAddress ({ id, address, consignee, phone }) {
+  console.log(id, address, consignee, phone)
+  let sql = `UPDATE tb_address SET address = ?, phone = ?, consignee = ? WHERE id = ?`
+  const res = await curd(sql, [address, phone, consignee, parseInt(id)])
+}
+
+/**
+ * 删除地址
+ */
+async function delAddress ({ id }) {
+  let sql = `DELETE FROM tb_address WHERE id = ?`
+  const res = await curd(sql, [id])
+}
+
+module.exports = { addAddress, findAddress, editAddress, delAddress }

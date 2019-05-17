@@ -5,9 +5,9 @@ const mysql = require('mysql')
 
 const curd = (sql, val) => {
   const connection = mysql.createConnection({
-    host: '111.231.105.157',
+    host: '39.108.6.26',
     user: 'root',
-    password: '123456',
+    password: 'bjl123456',
     database: 'bishe'
   })
   // 开始连接
@@ -19,7 +19,7 @@ const curd = (sql, val) => {
     connection.query(sql, val, (err, data) => {
       if (err) {
         reject(err)
-        throw new Error(err)
+        return
       } else {
         resolve(data)
       }

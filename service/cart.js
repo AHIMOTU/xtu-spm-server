@@ -63,22 +63,24 @@ async function addCart ({ cartId, product_id, userId, count }) {
 /**
  * 累加 往购物车内添加同类商品
  */
-async function directAddCart ({ product_id, count, userId }) {
+async function directAddCart ({ product_id, count }, userId) {
+  // console.log('555')
   const existCart = await isExistCart(userId)
   if (existCart.length) {
     const existProduct = await isExistProduct(product_id, userId)
-    console.log(existProduct)
+    // console.log(existProduct)
     if (existProduct.length) { // 购物车内已有该商品
       let sql3 = `UPDATE tb_cart_product SET count = ? WHERE cart_id = ? AND product_id = ?`
       const res3 = curd(sql3, [parseInt(existProduct[0].count + count), existCart[0].id, product_id])
-      console.log(res3)
+      // console.log('666')
+      // console.log(res3)
       if (!res3) {
         throw new Error('加入购物车失败')
       }
     } else { // 购物车内还没有该商品
       let sql2 = `INSERT INTO tb_cart_product (cart_id, product_id, count) VALUES (?, ?, ?)`
       const res2 = curd(sql2, [existCart[0].id, product_id, count])
-      console.log(res2)
+      // console.log(res2)
       if (!res2) {
         throw new Error('加入购物车失败')
       }
@@ -101,7 +103,7 @@ async function directAddCart ({ product_id, count, userId }) {
 /**
  * 查询购物车
  */
-async function findCart ({ userId }) {
+async function findCart (userId) {
   let sql = `SELECT p.*, cp.count, cp.selected, cp.ordered FROM tb_cart c LEFT JOIN tb_cart_product cp ON c.id = cp.cart_id LEFT JOIN tb_product p ON p.id = cp.product_id WHERE user_id = ?`
   const res = await curd(sql, [userId])
   // console.log(res)
@@ -121,7 +123,7 @@ async function deleteCart ({ productIds, userId }) {
       const res = await curd(sql, [existCart[0].id, product_id])
       console.log(res)
     }
-  }  
+  }
 }
 
 /**

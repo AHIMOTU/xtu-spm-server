@@ -13,6 +13,7 @@ const categoryRouter = require('./routes/category')
 const cartRouter = require('./routes/cart')
 const addressRouter = require('./routes/address')
 const orderRouter = require('./routes/order')
+const commentRouter = require('./routes/comment')
 
 const app = express()
 
@@ -57,6 +58,7 @@ app.use('/category', categoryRouter)
 app.use('/cart', cartRouter)
 app.use('/address', addressRouter)
 app.use('/order', orderRouter)
+app.use('/comment', commentRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -69,7 +71,7 @@ app.use(function (err, req, res, next) {
   // res.locals.message = err.message
   // res.locals.error = req.app.get('env') === 'development' ? err : {}
 
-  console.log('err1234567890-')
+  // console.log('err1234567890-')
   // 利用中间件统一处理抛出的错误
   res.fail(err.toString())
 })

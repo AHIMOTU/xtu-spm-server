@@ -14,4 +14,16 @@ router.get('/find', async (req, res, next) => {
   res.success(data)
 })
 
+// 编辑地址
+router.post('/edit', async (req, res, next) => {
+  await Address.editAddress(req.body)
+  res.success()
+})
+
+// 删除地址
+router.post('/del', async (req, res, next) => {
+  await Address.delAddress(req.body)
+  res.success()
+})
+
 module.exports = router

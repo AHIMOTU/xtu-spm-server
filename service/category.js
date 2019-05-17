@@ -1,4 +1,3 @@
-const Category = require('../models/category.js')
 const curd = require('../common/mysql.js')
 
 // 进行增删改查前先判断该数据是否存在

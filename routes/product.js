@@ -10,6 +10,12 @@ router.post('/', async (req, res, next) => {
   res.success()
 })
 
+// 按销量查询
+router.get('/listBySales', async (req, res, next) => {
+  const data = await ProductService.getSalesProduct(req.query)
+  res.success(data)
+})
+
 // id查询商品
 router.get('/detail', async (req, res, next) => {
   const result = await ProductService.getProductById(req.query)
@@ -32,6 +38,17 @@ router.get('/listByCateId', async (req, res, next) => {
 router.post('/delete', async (req, res, next) => {
   await ProductService.delProduct(req.body)
   res.success()
+})
+
+// 新增评论
+router.post('/addComment', async (req, res, next) => {
+  await ProductService.addComment(req.body, req.userId)
+  res.success()
+})
+
+// 获取评论
+router.get('/getComment', async (req, res, next) => {
+
 })
 
 // 上传图片
