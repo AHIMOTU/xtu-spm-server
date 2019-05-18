@@ -4,17 +4,17 @@ const crypto = require('lxj-crypto')
 /* 通过url判断接口是否需要token */
 function isCheck (req) {
   console.log(req.url)
-  /* 不需要token的接口路由 */
+  /* 需要token的接口路由 */
   let urls = [
-    /.*\/users/,
-    /.*\/product/,
-    /.*\/category/,
-    /.*favicon\.ico/
+    /.*\/address/,
+    /.*\/cart/,
+    /.*\/comment/,
+    /.*\/order/
   ]
-  let result = true
+  let result = false
   urls.forEach(item => {
     if (item.test(req.url)) {
-      result = false
+      result = true
     }
   })
   return result
